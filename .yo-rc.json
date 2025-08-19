@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": false,
+    "nodeVersion": "18.20.6",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.24.0"
+    },
+    "version": "1.20.0",
+    "libraryName": "spfx-training-10-pm",
+    "libraryId": "1f841353-5bf9-494f-915d-12c32df98273",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "spfxTraining10pm",
+    "solutionShortDescription": "spfxTraining10pm description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

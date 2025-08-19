@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "fluentui-controls-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/fluentuiControls/FluentuiControlsWebPart.js",
+          "manifest": "./src/webparts/fluentuiControls/FluentuiControlsWebPart.manifest.json"
+        }
+      ]
+    },
+    "sample-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/sample/SampleWebPart.js",
+          "manifest": "./src/webparts/sample/SampleWebPart.manifest.json"
+        }
+      ]
+    },
+    "property-pane-web-part-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/propertyPaneWebPart/PropertyPaneWebPartWebPart.js",
+          "manifest": "./src/webparts/propertyPaneWebPart/PropertyPaneWebPartWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "FluentuiControlsWebPartStrings": "lib/webparts/fluentuiControls/loc/{locale}.js",
+    "SampleWebPartStrings": "lib/webparts/sample/loc/{locale}.js",
+    "PropertyPaneWebPartWebPartStrings": "lib/webparts/propertyPaneWebPart/loc/{locale}.js"
+  }
+}
