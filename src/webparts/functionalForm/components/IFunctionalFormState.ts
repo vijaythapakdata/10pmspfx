@@ -3,4 +3,8 @@ export interface IFunctionalFormState{
     Email:string;
     Age:any;
     FullAddress:string;
+    Manager:any[];
+    ManagerId:any[];
+    Admin:any;
+    AdminId:any;
 }
