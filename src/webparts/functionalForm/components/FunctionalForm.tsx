@@ -2,7 +2,7 @@ import * as React from 'react';
 // import styles from './FunctionalForm.module.scss';
 import type { IFunctionalFormProps } from './IFunctionalFormProps';
 import { IFunctionalFormState } from './IFunctionalFormState';
-import { PrimaryButton,TextField } from '@fluentui/react';
+import { ChoiceGroup, Dropdown, PrimaryButton,TextField } from '@fluentui/react';
 import {Dialog} from "@microsoft/sp-dialog";
 import {Web} from "@pnp/sp/presets/all";
 import "@pnp/sp/items";
@@ -18,7 +18,11 @@ const FunctionalForm:React.FC<IFunctionalFormProps>=(props)=>{
     Manager:[],
     ManagerId:[],
     Admin:"",
-    AdminId:""
+    AdminId:"",
+    Department:"",
+    Skills:[],
+    Gender:"",
+    City:""
   });
   //create form
   const createForm=async()=>{
@@ -31,7 +35,10 @@ const item=await list.items.add({
   Age:parseInt(formdata.Age),
   Address:formdata.FullAddress,
   AdminId:formdata.AdminId,
-  ManagerId:{results:formdata.ManagerId}
+  ManagerId:{results:formdata.ManagerId},
+  CityId:formdata.City,
+  Department:formdata.Department,
+  Gender:formdata.Gender
 });
 Dialog.alert(`Item create successfully wit ID:${item.data.Id}`);
 console.log(item);
@@ -43,7 +50,11 @@ setFormData({
     Manager:[],
     ManagerId:[],
     Admin:"",
-    AdminId:""
+    AdminId:"",
+     Department:"",
+    Skills:[],
+    Gender:"",
+    City:""
 });
     }
     catch(err){
@@ -127,6 +138,26 @@ Dialog.alert(`Error while creating item:${err}`);
     defaultSelectedUsers={formdata.Manager}
     resolveDelay={1000}
     webAbsoluteUrl={props.siteurl}
+    />
+    <Dropdown
+    placeholder='--select'
+    options={props.departmentOptions}
+    selectedKey={formdata.Department}
+    label='Department'
+    onChange={(_,value)=>handleChange("Department",value?.key as string)}
+    />
+     <Dropdown
+    placeholder='--select'
+    options={props.cityOptions}
+    selectedKey={formdata.City}
+    label='City'
+    onChange={(_,value)=>handleChange("City",value?.key as string)}
+    />
+    <ChoiceGroup
+     options={props.genderOptions}
+    selectedKey={formdata.Gender}
+    label='Gender'
+    onChange={(_,value)=>handleChange("Gender",value?.key as string)}
     />
     <br/>
     <PrimaryButton
