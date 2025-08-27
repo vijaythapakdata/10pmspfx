@@ -2,7 +2,7 @@ import * as React from 'react';
 // import styles from './FunctionalForm.module.scss';
 import type { IFunctionalFormProps } from './IFunctionalFormProps';
 import { IFunctionalFormState } from './IFunctionalFormState';
-import { ChoiceGroup, Dropdown, PrimaryButton,TextField } from '@fluentui/react';
+import { ChoiceGroup, DatePicker, Dropdown, IDatePickerStrings, IDropdownOption,  PrimaryButton,TextField } from '@fluentui/react';
 import {Dialog} from "@microsoft/sp-dialog";
 import {Web} from "@pnp/sp/presets/all";
 import "@pnp/sp/items";
@@ -22,7 +22,8 @@ const FunctionalForm:React.FC<IFunctionalFormProps>=(props)=>{
     Department:"",
     Skills:[],
     Gender:"",
-    City:""
+    City:"",
+    DOB:null
   });
   //create form
   const createForm=async()=>{
@@ -38,7 +39,9 @@ const item=await list.items.add({
   ManagerId:{results:formdata.ManagerId},
   CityId:formdata.City,
   Department:formdata.Department,
-  Gender:formdata.Gender
+  Gender:formdata.Gender,
+  DOB:new Date(formdata.DOB),
+  Skills:{results:formdata.Skills}
 });
 Dialog.alert(`Item create successfully wit ID:${item.data.Id}`);
 console.log(item);
@@ -54,7 +57,8 @@ setFormData({
      Department:"",
     Skills:[],
     Gender:"",
-    City:""
+    City:"",
+    DOB:null
 });
     }
     catch(err){
@@ -81,6 +85,19 @@ Dialog.alert(`Error while creating item:${err}`);
      const managerId=items.map((i:any)=>i.id);
      setFormData(prev=>({...prev,Manager:managerName,ManagerId:managerId}))
   }
+//   //on skills change
+//   const onSKillsChange=(event:React.FormEvent<HTMLInputElement>,options?:IDropdownProps)=>{
+//     if(!options)
+//       return;
+//     setFormData((prev:any)=>{
+// const current=prev.Skills||[];
+// const updated=options.selected
+//     })
+//   }
+const onSKillsChange=(event:React.FormEvent<HTMLInputElement>,options:IDropdownOption):void=>{
+  const selectedKey=options.selected?[...formdata.Skills,options.key as string]:formdata.Skills.filter((key)=>key!==options.key);
+  setFormData(prev=>({...prev,Skills:selectedKey}));
+}
   return(
     <>
     <TextField
@@ -159,6 +176,24 @@ Dialog.alert(`Error while creating item:${err}`);
     label='Gender'
     onChange={(_,value)=>handleChange("Gender",value?.key as string)}
     />
+      <Dropdown
+    placeholder='--select'
+    options={props.skillsOptions}
+    // selectedKey={formdata.C}
+    defaultSelectedKeys={formdata.Skills}
+    label='Skills'
+    // onChange={(_,value)=>handleChange("City",value?.key as string)}
+    onChange={onSKillsChange}
+    multiSelect
+    />
+    <DatePicker
+    label='Date of Birth'
+    strings={DatePickerStrings}
+    value={formdata.DOB}
+    formatDate={formateDate}
+    onSelectDate={(date)=>setFormData(prev=>({...prev,DOB:date}))}
+   
+    />
     <br/>
     <PrimaryButton
     text='Save' onClick={createForm} iconProps={{iconName:'save'}}/>
@@ -166,3 +201,32 @@ Dialog.alert(`Error while creating item:${err}`);
   )
 }
 export default FunctionalForm;
+
+export const DatePickerStrings:IDatePickerStrings={
+  months:["January","February","March","April","May","June","July","August","September","October","November","December"],
+  shortMonths:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+  days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+  shortDays:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+  goToToday:"Go to today",
+  prevMonthAriaLabel:"Go to previous month",
+  nextMonthAriaLabel:"Go to next month",
+  prevYearAriaLabel:"Go to previous year",
+  nextYearAriaLabel:"Go to next year"
+}
+export const formateDate=(date:any):string=>{
+  var date1=new Date(date);
+
+  //get year
+  var year=date1.getFullYear();
+  //get month
+  var month=(1+date1.getMonth()).toString();
+  month=month.length>1?month:'0'+month;
+  //get day
+  var day=date1.getDate().toString();
+  day=day.length>1?day:'0'+day;
+
+  return month+'/'+day+'/'+year;
+  
+
+
+}
