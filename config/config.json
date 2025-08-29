@@ -33,6 +33,14 @@
           "manifest": "./src/webparts/functionalForm/FunctionalFormWebPart.manifest.json"
         }
       ]
+    },
+    "form-validation-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/formValidation/FormValidationWebPart.js",
+          "manifest": "./src/webparts/formValidation/FormValidationWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -41,6 +49,7 @@
     "SampleWebPartStrings": "lib/webparts/sample/loc/{locale}.js",
     "PropertyPaneWebPartWebPartStrings": "lib/webparts/propertyPaneWebPart/loc/{locale}.js",
     "FunctionalFormWebPartStrings": "lib/webparts/functionalForm/loc/{locale}.js",
-    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "FormValidationWebPartStrings": "lib/webparts/formValidation/loc/{locale}.js"
   }
 }
