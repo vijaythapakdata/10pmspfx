@@ -41,6 +41,22 @@
           "manifest": "./src/webparts/formValidation/FormValidationWebPart.manifest.json"
         }
       ]
+    },
+    "large-list-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/largeList/LargeListWebPart.js",
+          "manifest": "./src/webparts/largeList/LargeListWebPart.manifest.json"
+        }
+      ]
+    },
+    "pagination-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/pagination/PaginationWebPart.js",
+          "manifest": "./src/webparts/pagination/PaginationWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -50,6 +66,8 @@
     "PropertyPaneWebPartWebPartStrings": "lib/webparts/propertyPaneWebPart/loc/{locale}.js",
     "FunctionalFormWebPartStrings": "lib/webparts/functionalForm/loc/{locale}.js",
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
-    "FormValidationWebPartStrings": "lib/webparts/formValidation/loc/{locale}.js"
+    "FormValidationWebPartStrings": "lib/webparts/formValidation/loc/{locale}.js",
+    "LargeListWebPartStrings": "lib/webparts/largeList/loc/{locale}.js",
+    "PaginationWebPartStrings": "lib/webparts/pagination/loc/{locale}.js"
   }
 }
