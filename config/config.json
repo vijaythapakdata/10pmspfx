@@ -57,6 +57,22 @@
           "manifest": "./src/webparts/pagination/PaginationWebPart.manifest.json"
         }
       ]
+    },
+    "get-allusers-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/getAllusers/GetAllusersWebPart.js",
+          "manifest": "./src/webparts/getAllusers/GetAllusersWebPart.manifest.json"
+        }
+      ]
+    },
+    "persona-card-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/personaCard/PersonaCardWebPart.js",
+          "manifest": "./src/webparts/personaCard/PersonaCardWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -68,6 +84,8 @@
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
     "FormValidationWebPartStrings": "lib/webparts/formValidation/loc/{locale}.js",
     "LargeListWebPartStrings": "lib/webparts/largeList/loc/{locale}.js",
-    "PaginationWebPartStrings": "lib/webparts/pagination/loc/{locale}.js"
+    "PaginationWebPartStrings": "lib/webparts/pagination/loc/{locale}.js",
+    "GetAllusersWebPartStrings": "lib/webparts/getAllusers/loc/{locale}.js",
+    "PersonaCardWebPartStrings": "lib/webparts/personaCard/loc/{locale}.js"
   }
 }

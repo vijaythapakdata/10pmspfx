@@ -5,7 +5,7 @@ import {Table,Input} from 'antd';
 import {sp} from '@pnp/sp/presets/all';
 const Pagination:React.FC<IPaginationProps>=(props)=>{
   const [items,setItems]=React.useState<any[]>([]);
-  const[search,setSearch]=React.useState<string>('');
+  const[searchText,setSearch]=React.useState<string>('');
 
   React.useEffect(()=>{
     sp.setup({
@@ -33,13 +33,13 @@ const Pagination:React.FC<IPaginationProps>=(props)=>{
       title:"Name",
       dataIndex:"Title",
       key:"Title",
-      sorter:(a:any,b:any)=>a.Title.localCompare(b.Title)
+      sorter:(a:any,b:any)=>a.Title.localeCompare(b.Title)
     },
      {
       title:"Email Address",
       dataIndex:"EmailAddress",
       key:"EmailAddress",
-      sorter:(a:any,b:any)=>a.EmailAddress.localCompare(b.EmailAddress)
+      sorter:(a:any,b:any)=>a.EmailAddress.localeCompare(b.EmailAddress)
     },
     {
       title:"Age",
@@ -60,8 +60,25 @@ const Pagination:React.FC<IPaginationProps>=(props)=>{
   const handleSearch=(event:React.ChangeEvent<HTMLInputElement>)=>{
     setSearch(event.target.value);
   }
+const _filteredSearch=items.filter((item)=>(item?.Title.toLowerCase()||'').includes(searchText.toLowerCase())||
+(item?.Email?.toLowerCase()||'').includes(searchText.toLowerCase())||(item?.Admin?.toLowerCase()||'').includes(searchText.toLowerCase())||
+(item?.City?.toLowerCase()||'').includes(searchText.toLowerCase())
+)
+
   return(
-    <></>
+    <>
+    
+    <Input
+    placeholder='search here...'
+    value={searchText}
+    onChange={handleSearch}
+    />
+    <Table
+    dataSource={_filteredSearch}
+    columns={columns}
+    pagination={{pageSize:3}}
+    />
+    </>
   )
 
 }
